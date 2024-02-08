@@ -1,5 +1,5 @@
 from pool_share_scanner.constants import BALANCER_POOL_SHARES_QUERY, BALANCER_GAUGES_SHARES_QUERY, AURA_SHARES_QUERY
-from utils import fetch_graphql_data
+from pool_share_scanner.utils import fetch_graphql_data
 
 
 def fetch_pool_data(pool_id, block, endpoint):
