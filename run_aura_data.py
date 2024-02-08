@@ -10,12 +10,12 @@ def main():
     output_dir = "aura"
     os.makedirs(output_dir, exist_ok=True)
 
-
     # --- MAINNET ---
     # Pool and Gauge pairing
     pool_gauge_pairs_mainnet = {
-        "191": "0x0bcdb6d9b27bd62d3de605393902c7d1a2c71aab",  # rsETH-ETHx
         "182": "0xc859bf9d7b8c557bbd229565124c2c09269f3aef",  # rETH-weETH
+        "189": "0xa8b309a75f0d64ed632d45a003c68a30e59a1d8b",  # ezETH-WETH
+        "191": "0x0bcdb6d9b27bd62d3de605393902c7d1a2c71aab",  # rsETH-ETHx
     }
 
     # Generate filename with block number and timestamp
