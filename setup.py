@@ -6,6 +6,9 @@ setup(
     packages=find_packages(),
     install_requires=[
         'requests',
+        'datetime',
+        'gql',
+        'requests_toolbelt'
     ],
-    # Add more metadata like author, description, etc.
+    author='xeonus',
 )

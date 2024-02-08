@@ -29,6 +29,9 @@ def merge_pool_and_gauge_data(pool_data, gauge_data, pool_gauge_pairs, block):
     merged_data = []
     for pool_item in pool_data:
         user_id = pool_item['user_address_id']
+        # Exclude entries where userAddress matches gaugeId
+        if user_id in gauge_to_pool:  # Check against gauge_to_pool for direct match
+            continue
         if user_id in gauge_lookup:
             # Merge gauge data into pool data if user exists in both
             gauge_item = gauge_lookup.pop(user_id)
@@ -41,11 +44,10 @@ def merge_pool_and_gauge_data(pool_data, gauge_data, pool_gauge_pairs, block):
 
     # Add remaining gauge entries not matched with pool data
     for user_id, gauge_item in gauge_lookup.items():
-        # Skip entries where userAddress matches any gaugeId
-        if user_id in pool_gauge_pairs.values():
-            continue
-
         gauge_id = gauge_item['gauge_id']
+        # Exclude entries where userAddress is the gauge itself
+        if user_id == gauge_id:  # Corrected the check here
+            continue
         pool_id = gauge_to_pool.get(gauge_id, '-')  # Use pool_id corresponding to gauge_id, if available
         merged_data.append({
             'block': block,

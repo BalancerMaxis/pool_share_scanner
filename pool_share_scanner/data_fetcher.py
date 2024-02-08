@@ -1,19 +1,9 @@
+from pool_share_scanner.constants import BALANCER_POOL_SHARES_QUERY, BALANCER_GAUGES_SHARES_QUERY, AURA_SHARES_QUERY
 from utils import fetch_graphql_data
 
 
 def fetch_pool_data(pool_id, block, endpoint):
-    query = """
-    query GetUserPoolBalances($poolId: ID!, $block: Int) {
-        pool(id: $poolId, block: {number: $block}) {
-            shares(where: {balance_gt: "0"}, orderBy: balance, orderDirection: desc) {
-                userAddress {
-                    id
-                }
-                balance
-            }
-        }
-    }
-    """
+    query = BALANCER_POOL_SHARES_QUERY
     variables = {"poolId": pool_id, "block": block}
     data = fetch_graphql_data(endpoint, query, variables)
     results = []
@@ -30,23 +20,7 @@ def fetch_pool_data(pool_id, block, endpoint):
 
 
 def fetch_gauge_data(gauge_id, block, endpoint):
-    query = """
-    query FetchGaugeShares($gaugeAddress: String!, $block: Int) {
-      gaugeShares(
-        block: {number: $block}
-        where: {gauge_contains_nocase: $gaugeAddress, balance_gt: "1"}
-        orderBy: balance
-        orderDirection: desc
-        first: 1000
-      ) {
-        balance
-        id
-        user {
-          id
-        }
-      }
-    }
-    """
+    query = BALANCER_GAUGES_SHARES_QUERY
     variables = {
         "gaugeAddress": gauge_id,
         "block": block
@@ -59,5 +33,24 @@ def fetch_gauge_data(gauge_id, block, endpoint):
                 'user_address_id': share['user']['id'],
                 'balance': share['balance'],
                 'gauge_id': gauge_id  # Include gauge ID for merging
+            })
+    return results
+
+
+def fetch_aura_pool_shares(pool_id, block, endpoint):
+    # Prepare the GraphQL query and variables
+    variables = {"poolId": pool_id, "block": block}
+    data = fetch_graphql_data(endpoint, AURA_SHARES_QUERY, variables)
+    results = []
+
+    # Parse the data if the query was successful
+    if data and 'data' in data and 'leaderboard' in data['data'] and data['data']['leaderboard']['accounts']:
+        for account in data['data']['leaderboard']['accounts']:
+            results.append({
+                'block': block,
+                'pool_id': pool_id,
+                'gauge_id': '-',  # Default placeholder for gauge_id
+                'user_address_id': account['account']['id'],
+                'balance': account['staked']
             })
     return results
