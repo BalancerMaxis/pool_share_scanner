@@ -1,15 +1,16 @@
-BALANCER_SUBGRAPH_MAINNET = "https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-v2"
-BALANCER_GAUGE_SUBGRAPH_MAINNET = "https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-gauges"
-AURA_SUBGRAPH_MAINNET = "https://graph.aura.finance/subgraphs/name/aura/aura-mainnet-v2-1"
+AURA_SUBGRAPH_BY_CHAIN = {
+    'mainnet': "https://graph.aura.finance/subgraphs/name/aura/aura-mainnet-v2-1",
+    'zkevm': "https://subgraph.satsuma-prod.com/ab0804deff79/1xhub-ltd/aura-finance-zkevm/api"
+}
 
 BALANCER_GAUGE_SUBGRAPH_BY_CHAIN = {
     "mainnet": "https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-gauges",
-    "zkevm": ""
+    "zkevm": "https://api.studio.thegraph.com/query/24660/balancer-gauges-polygon-zk/version/latest"
 }
 
 BALANCER_SUBGRAPH_BY_CHAIN = {
     "mainnet": "https://api.thegraph.com/subgraphs/name/balancer-labs/balancer-v2",
-    "zkevm": ''
+    "zkevm": 'https://api.studio.thegraph.com/query/24660/balancer-polygon-zk-v2/version/latest'
 }
 
 
