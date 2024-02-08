@@ -1,4 +1,4 @@
-from data_fetcher import fetch_pool_data, fetch_gauge_data
+from pool_share_scanner.data_fetcher import fetch_pool_data, fetch_gauge_data
 
 
 def process_balancer_pool_user_bpts(pool_gauge_pairs, block, pool_endpoint, gauge_endpoint):
