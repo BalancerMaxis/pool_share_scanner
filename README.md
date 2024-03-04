@@ -1,3 +1,5 @@
+# Important Disclaimer
+This is a MVP project to showcase how to fetch subgraph data to evaluate BPT shares. **Use this repository if you want to integrate it into your pipeline: https://github.com/BalancerMaxis/ecosystem_balances_example** 
 # Pool Share Scanner
 
 The Pool Share Scanner is a tool designed for fetching and aggregating user stake information from both Balancer and
